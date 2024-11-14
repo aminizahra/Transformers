@@ -8,6 +8,7 @@ In this repository, we’ll dive into the foundational concepts of Transformers,
 This repository is designed to guide you through the journey of understanding and implementing Transformer models. We begin with the fundamental concepts of Transformer architecture and attention mechanisms, explore the distinction between foundation and fine-tuned models, and delve into the immense impact Transformers have made across fields. As you proceed, you’ll encounter practical applications, a detailed catalog of notable models, and insights into related architectures like diffusion models.
 
 Here’s a complete list of the contents that will be in this repository:
+
 **Introduction**
 01. **What are Transformers**  
 02. **Encoder/Decoder Architecture**  
