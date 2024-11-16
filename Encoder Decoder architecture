@@ -1,0 +1,89 @@
+# Encoder/Decoder Architecture in Transformers
+
+The **Encoder/Decoder architecture** is a foundational component of the Transformer model, designed to handle sequence-to-sequence tasks such as translation, text summarization, and more. This architecture is composed of two main components:
+
+---
+
+## 1. Encoder
+
+The Encoder processes the input sequence and converts it into a fixed-length representation (a set of continuous vectors) that encapsulates its meaning. The encoder consists of multiple layers, each including the following sub-components:
+
+### **a. Input Embedding**
+- The input text is tokenized and embedded into dense vectors using an embedding layer.
+- Positional encodings are added to these vectors to introduce positional information since Transformers lack inherent sequential data handling.
+
+### **b. Self-Attention Mechanism**
+The self-attention mechanism enables the encoder to focus on different parts of the input sequence while encoding a particular token. This helps capture contextual relationships effectively.
+
+**Key steps in self-attention:**
+1. Compute three vectors for each input token: **Query (Q)**, **Key (K)**, and **Value (V)**.
+2. Calculate attention scores using the dot product of Query and Key, followed by a softmax operation.
+3. Use these scores to weight the Value vectors, producing a weighted sum for each token.
+
+### **c. Feed-Forward Neural Network (FFN)**
+- After the self-attention mechanism, the output is passed through a feed-forward neural network applied independently to each token.
+
+### **d. Residual Connections and Layer Normalization**
+- Residual connections (skip connections) and layer normalization are applied after each sub-layer (self-attention and FFN) to stabilize training and improve performance.
+
+The encoder outputs a sequence of continuous representations, which are passed to the next layer. The final encoder layer generates context-aware embeddings, which are fed into the decoder.
+
+---
+
+## 2. Decoder
+
+The Decoder generates the output sequence, token by token, based on the encoder’s output and its own previously generated tokens. Like the encoder, the decoder consists of multiple layers with the following components:
+
+### **a. Masked Self-Attention**
+- Unlike the encoder's self-attention, the decoder's self-attention mechanism is **masked** to ensure that the model cannot "look ahead" at future tokens during training. This enforces an autoregressive property.
+
+### **b. Encoder-Decoder Attention**
+- The decoder uses an encoder-decoder attention mechanism to attend to the encoder's output. This helps the decoder focus on relevant parts of the input sequence while generating the output.
+
+### **c. Feed-Forward Neural Network (FFN)**
+- Similar to the encoder, each decoder layer has a feed-forward neural network for further transformation of the embeddings.
+
+### **d. Residual Connections and Layer Normalization**
+- Residual connections and layer normalization are applied to stabilize training and improve performance.
+
+### **e. Output Projection**
+- The decoder outputs are passed through a linear layer and a softmax function to produce probabilities over the target vocabulary for the next token.
+
+---
+
+## How Encoder and Decoder Work Together
+
+1. **Input Encoding:**  
+   The encoder processes the input sequence into context-aware representations.
+
+2. **Decoding with Attention:**  
+   The decoder uses these representations, combined with its previously generated tokens, to produce the output sequence one token at a time.
+
+3. **Autoregressive Process:**  
+   The decoder predicts the next token based on the tokens generated so far and the encoder output. This process continues until a special "end-of-sequence" token is generated.
+
+---
+
+## Advantages of the Encoder/Decoder Architecture
+
+- **Bidirectional Encoding:**  
+  The encoder processes the entire input sequence at once, allowing it to model dependencies in both directions.
+
+- **Flexible Decoding:**  
+  The decoder generates output tokens step-by-step, making it adaptable for various sequence lengths.
+
+- **Attention Mechanisms:**  
+  The use of attention ensures that both the encoder and decoder focus on the most relevant parts of the input or previously generated output.
+
+---
+
+## Applications of Encoder/Decoder Architecture
+
+- **Machine Translation:** (e.g., English-to-French)  
+- **Text Summarization**  
+- **Question Answering**  
+- **Speech-to-Text Systems**
+
+---
+
+For more details, see the [Transformer Theory Guide](link-to-detailed-guide.md) or explore [Code Implementations](link-to-code-folder).
